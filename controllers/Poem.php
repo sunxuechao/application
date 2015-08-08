@@ -15,8 +15,7 @@ class Poem extends My_Controller {
         $this->load->helper('url');
 
         $data = array();
-        $data['header_data']['title'] = '收集信息-';
-        $data['header_data']['site_host'] = base_url();
+        $data['header_data'] = $this->render_header('收集信息-');
 
         $this->load->view('header',$data);
         $this->load->view('poem_edit');
@@ -28,18 +27,8 @@ class Poem extends My_Controller {
      */
     private function get_data(){
         $data = array();
-        $data['header_data'] = $this->render_header();
+        $data['header_data'] = $this->render_header('测试地址');
         $data['message'] = 'this is test';
-
-        return $data;
-    }
-
-    private function render_header(){
-        $this->load->helper('url');
-
-        $data = array();
-        $data['title'] = '首页';
-        $data['site_host'] = base_url();
 
         return $data;
     }

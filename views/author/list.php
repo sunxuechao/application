@@ -168,9 +168,9 @@ function afterSubmit(result, callParam){
         $('#poem_title').val('');
         $('#poem_author').val('');
         $('#poem_content').val('');
-        popWarn($('#pop_warn'), '操作成功', 500);
+        popWarn($('#pop_warn'), '操作成功');
     }else{
-        popWarn($('#pop_warn'), '操作失败', 500);
+        popWarn($('#pop_warn'), '操作失败');
     }
 }
 

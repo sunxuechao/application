@@ -1,18 +1,36 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Author extends CI_Controller {
+class Author extends My_Controller {
 
-	public function index()	{
-		$this->load->view('welcome_message');
+	public function __construct() {
+		parent::__construct();
+		$this->load->model('Dynasty_Model');
+		echo 1111;
 	}
 
-	public function render_header()	{
-		$author_model = $this->load->model('Author_Model', '', true);
-		$author_infos = $this->Author_Model->get_authors();
-		print_r($author_infos);
-		echo Author_Model::DB_TABLE_AUTHOR;
-		echo urldecode($this->uri->segment(3));
-		echo '你好';
-	}
+    public function index() {
+        $data = $this->get_data();
+
+        $this->load->view('header', $data);
+        $this->load->view('author/list');
+        $this->load->view('footer');
+    }
+
+    private function get_data() {
+    	$data = array();
+        $data['header_data'] = $this->render_header('');
+
+        return $data;
+    }
+
+    public function create(){
+        $data = array();
+        $data['header_data'] = $this->render_header('');
+        $data['dynasty_list']= $this->Dynasty_Model->dynasty_list();
+
+        $this->load->view('header', $data);
+        $this->load->view('author/create');
+        $this->load->view('footer');
+    }
 }

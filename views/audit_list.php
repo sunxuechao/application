@@ -11,15 +11,15 @@
         </div>
     </div>
     <div id="ct-center" class="center" style="width:760px;">
-        <h3 class=""><strong>添加诗词</strong></h3>
+        <h3 class=""><strong>审核诗词</strong></h3>
         <ul class="edit-poem clear">
             <li class="clear">
                 <label class="">标题：</label>
-                <input type="text" id="poem_title" />
+                <input type="text" id="poem_title" value="<?=$poem_info->poetry_title?>" />
             </li>
             <li class="clear">
                 <label class="">作者：</label>
-                <input type="text" id="poem_author" />
+                <input type="text" id="poem_author" value="<?=$poem_info->author_name?>" />
             </li>
             <li class="clear">
                 <label class="">内容：</label>
@@ -27,36 +27,14 @@
             </li>
             <li class="clear">
                 <label class="" style="visibility: hidden;">内容：</label>
-                <textarea rows="10" cols="60" id="poem_content"></textarea>
+                <textarea rows="10" cols="60" id="poem_content"><?=$poem_info->poetry_content?></textarea>
             </li>
+            <?php if($poem_info->poetry_status == Poetry_Model::STATUS_TMP_AUDIT):?>
             <li class="clear" style="margin:20px 0;text-align: center;">
-                <input type="button" class="button" id="submit" value="提交">
-                <input type="button" class="button" id="go-back" value="返回">
+                <input type="button" class="button" id="pass" value="通过">
+                <input type="button" class="button" id="reject" value="驳回">
             </li>
-        </ul>
-        <ul class="edit-author clear" style="display:none;">
-            <li class="clear">
-                <label class="">名字：</label>
-                <input type="text">
-            </li>
-            <li class="clear">
-                <label class="">年代：</label>
-                <select id="author-time">
-                    <option>唐</option>
-                </select>
-            </li>
-            <li class="clear">
-                <label class="">简介：</label>
-                <input rows="10" cols="60" style="visibility: hidden;">
-            </li>
-            <li class="clear">
-                <label class="" style="visibility: hidden;">简介：</label>
-                <textarea rows="10" cols="60"></textarea>
-            </li>
-            <li class="clear" style="margin:20px 0;text-align: center;">
-                <input type="button" class="button" id="submit" value="提交">
-                <input type="button" class="button" id="go-back" value="返回">
-            </li>
+            <?php endif;?>
         </ul>
     </div>
     <div id="ct-right" class="right">
@@ -142,40 +120,34 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#submit').bind('click', function(){
+    $('#pass, #reject').bind('click', function(){
         var paramData = {};
-        paramData.title = $('#poem_title').val();
-        paramData.author = $('#poem_author').val();
-        paramData.content = $('#poem_content').val();
+        paramData.status = $(this).attr('id');
+        paramData.poetry_id = <?=$poem_info->poetry_id?>;
         if(checkSubmitData(paramData) === false){return false;}
 
         var callData = {};
-        callData.obj = $(this);
+        callData.obj = $('#pass, #reject');
 
         callData.obj.attr("disabled", true);
         callData.obj.css('cursor', 'not-allowed');
 
-        var url = '<?php echo $header_data['site_host']?>aj/poem';
+        var url = '<?php echo $header_data['site_host']?>aj/audit';
         ajaxPost(paramData, url, afterSubmit, callData);
     });
 });
 
 function afterSubmit(result, callParam){
-    callParam.obj.attr("disabled", false);
-    callParam.obj.css('cursor', 'default');
-
     if(result.code == 100000){
-        $('#poem_title').val('');
-        $('#poem_author').val('');
-        $('#poem_content').val('');
-        popWarn($('#pop_warn'), '操作成功', 500);
+        $('#pass, #reject').remove();
+        popWarn($('#pop_warn'), '操作成功');
     }else{
-        popWarn($('#pop_warn'), '操作失败', 500);
+        popWarn($('#pop_warn'), '操作失败');
     }
 }
 
 function checkSubmitData(data){
-    if(data.title == '' || data.author == '' || data.content == ''){
+    if(!(data.status == 'pass' || data.status == 'reject') || data.poetry_id < 1){
         popWarn($('#pop_warn'), '提交数据不可为空');
         return false;
     }
