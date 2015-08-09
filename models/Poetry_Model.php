@@ -65,7 +65,7 @@ class Poetry_Model extends CI_Model {
         $con_field = implode(' AND ', $where);
 
         $sql  = 'SELECT * FROM ' . self::DB_TABLE_POEM_TMP . ' WHERE ' . $con_field;
-        $sql .= ' LIMIT ' . $con_limit;
+        $sql .= ' ORDER BY poetry_id DESC LIMIT ' . $con_limit;
 
         $query = $this->db->query($sql, $field_val);
         return $query->result();
@@ -82,5 +82,25 @@ class Poetry_Model extends CI_Model {
         $poem_info = $query->result();
 
         return isset($poem_info[0]) ? $poem_info[0] : array();
+    }
+
+    /**
+     * 添加诗词到正式表
+     * @param array $data 添加进数据库的数组
+     * @throws 抛出可能存在的异常
+     * @return int
+     */
+    public function add_poetry($data = array()){
+        if(empty($data) || !is_array($data)){
+            throw new Exception('Poem Add Data Empty', 200001);
+        }
+
+        $data['poetry_status'] = 1;
+        $data['poetry_view']   = 1;
+        $data['poetry_create'] = time();
+        $data['poetry_last']   = time();
+        $this->db->insert(self::DB_TABLE_POEM, $data);
+
+        return $this->db->insert_id();
     }
 }

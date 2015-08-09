@@ -1,32 +1,32 @@
 <div id="content">
     <div id="ct-center" class="center" style="width:760px;">
-        <h3 class=""><strong>添加作者</strong></h3>
-        <ul class="edit-author clear">
-            <li class="clear">
-                <label class="">名字：</label>
-                <input type="text" id="author-name">
-            </li>
-            <li class="clear">
-                <label class="">年代：</label>
-                <select id="author-time">
-                <?php foreach ($dynasty_list as $key => $item):?>
-                    <option value="<?=$key?>"><?=$item?></option>
-                <?php endforeach;?>
-                </select>
-            </li>
-            <li class="clear">
-                <label class="">简介：</label>
-                <input rows="10" cols="60" style="visibility: hidden;">
-            </li>
-            <li class="clear">
-                <label class="" style="visibility: hidden;">简介：</label>
-                <textarea rows="10" cols="60" id="author-brief"></textarea>
-            </li>
-            <li class="clear" style="margin:20px 0;text-align: center;">
-                <input type="button" class="button" id="submit" value="提交">
-                <input type="button" class="button" id="go-back" value="返回">
-            </li>
-        </ul>
+        <h3 class=""><strong>审核列表</strong></h3>
+        <table class="table">
+            <tr>
+                <th>标题</th>
+                <th>作者</th>
+                <th>内容</th>
+                <th>时间</th>
+                <th style="width: 8em;">操作</th>
+            </tr>
+            <?php foreach ($data_list as $key => $item):?>
+            <tr tmp_id="<?=$item->poetry_id?>" poetry_id="0">
+                <td><?=$item->poetry_title?></td>
+                <td><?=$item->author_name?></td>
+                <td title="<?=$item->poetry_content?>"><?=mb_strimwidth($item->poetry_content, 1, 25, '…')?></td>
+                <td><?=date('Y-m-d H:i:s', $item->poetry_create)?></td>
+                <td>
+                <?php if($item->poetry_status == 1) { ?>
+                    <a href="javascript:void(0);" class="audit" data_type="pass">通过</a>
+                    <a href="javascript:void(0);" class="audit" data_type="reject">驳回</a>
+                <?php } else { ?>
+                    <a href="javascript:void(0);" class="audited">通过</a>
+                    <a href="javascript:void(0);" class="audited">驳回</a>
+                <?php } ?>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </table>
     </div>
     <div id="ct-right" class="right">
         <div class="hot-poetry">
@@ -111,35 +111,23 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#submit').bind('click', function(){
+    $('.audit').bind('click', function(){
         var paramData = {};
-        paramData.name = $('#author-name').val();
-        paramData.time = $('#author-time').val();
-        paramData.brief = $('#author-brief').val();
-        if(checkSubmitData(paramData) === false){return false;}
+        paramData.status = $(this).attr('data_type');
+        paramData.tmp_id = $(this).parent().parent().attr('tmp_id');
+        paramData.poetry_id = $(this).parent().parent().attr('poetry_id');
 
         var callData = {};
-        callData.obj = $(this);
-
-        callData.obj.attr("disabled", true);
-        callData.obj.css('cursor', 'not-allowed');
-
-        var url = '<?php echo $header_data['site_host']?>aj/author';
+        var url = '<?php echo $header_data['site_host']?>aj/audit';
         ajaxPost(paramData, url, afterSubmit, callData);
+    });
+
+    $('.audited').bind('click', function(){
+        popWarn($('#pop_warn'), '数据已审核', 1000);
     });
 });
 
 function afterSubmit(result, callParam){
-    callParam.obj.attr("disabled", false);
-    callParam.obj.css('cursor', 'default');
-    popWarn($('#pop_warn'), result.msg, 3000);
-
-    /*if(result.code == 100000){
-        popWarn($('#pop_warn'), result.msg);
-    }  */  
-}
-
-function checkSubmitData(data){
-    /* 验证数据的code */
+    popWarn($('#pop_warn'), result.msg, 1500);
 }
 </script>
