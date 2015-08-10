@@ -73,6 +73,7 @@ class Audit extends My_Controller{
         $data['poetry_title']   = $tmp_info->poetry_title;
         $data['poetry_content'] = $tmp_info->poetry_content;
         $data['author_id']      = $author_info->author_id;
+        $data['author_name']    = $author_info->author_name;
         $data['author_time']    = $author_info->author_time;
 
         $poetry_id = $this->Poetry_Model->add_poetry($data);

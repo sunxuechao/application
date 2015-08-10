@@ -3,11 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Author extends My_Controller {
 
-	public function __construct() {
-		parent::__construct();
-		$this->load->model('Dynasty_Model');
-		echo 1111;
-	}
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Dynasty_Model');
+    }
 
     public function index() {
         $data = $this->get_data();
@@ -18,7 +17,7 @@ class Author extends My_Controller {
     }
 
     private function get_data() {
-    	$data = array();
+        $data = array();
         $data['header_data'] = $this->render_header('');
 
         return $data;

@@ -103,4 +103,22 @@ class Poetry_Model extends CI_Model {
 
         return $this->db->insert_id();
     }
+
+    /**
+     * 获取正式表诗词
+     * @param array $where 条件查询字段
+     * @param array $field_val 条件查询值
+     * @param array $limit 查询的偏移值
+     * @return array
+     */
+    public function list_poetry($where = array(), $field_val = array(), $limit = array(0, 10)){
+        $con_limit = implode(', ', $limit);
+        $con_field = implode(' AND ', $where);
+
+        $sql  = 'SELECT * FROM ' . self::DB_TABLE_POEM . ' WHERE ' . $con_field;
+        $sql .= ' ORDER BY poetry_id DESC LIMIT ' . $con_limit;
+
+        $query = $this->db->query($sql, $field_val);
+        return $query->result();
+    }
 }

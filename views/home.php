@@ -5,24 +5,18 @@
                 <a href="">换一换</a>
             </h3>
             <div class="change">
+            <?php foreach ($change as $key => $item):?>
                 <div class="article-title">
-                    <a class="on" href="/artist/105758/songlist">《相思》</a>
+                    <a class="on" href="#"><?=$item->poetry_title?></a>
                 </div>
-                <div class="article-author"><a href="#">唐 · 王维</a></div>
-                <div class="article-sentence">闺中少妇不知愁<br />春日凝妆上翠楼<br />
-忽见陌头杨柳色<br />悔教夫婿觅封侯</div>
-                <div class="article-title">
-                    <a class="on" href="/artist/105758/songlist">《相思》</a>
+                <div class="article-author">
+                    <a href="#"><?=$dynasty_list[$item->author_time]?></a> · 
+                    <a href="#"><?=$item->author_name?></a>
                 </div>
-                <div class="article-author"><a href="#">唐 · 王维</a></div>
-                <div class="article-sentence">闺中少妇不知愁<br />春日凝妆上翠楼<br />
-忽见陌头杨柳色<br />悔教夫婿觅封侯</div>
-                <div class="article-title">
-                    <a class="on" href="/artist/105758/songlist">《相思》</a>
+                <div class="article-sentence">
+                    <?=str_replace(array('，', '。', '？', '！'), array('，<br />', '。<br />', '？<br />', '！<br />'), $item->poetry_content)?>
                 </div>
-                <div class="article-author"><a href="#">唐 · 王维</a></div>
-                <div class="article-sentence">闺中少妇不知愁<br />春日凝妆上翠楼<br />
-忽见陌头杨柳色<br />悔教夫婿觅封侯</div>
+            <?php endforeach;?>
             </div>           
             <div class="more">
                 <a href="JavaScript:void(0);">&nbsp;</a>
@@ -31,12 +25,13 @@
         <div id="ct-center" class="center">
             <h3 class=""><strong>最新收录</strong><a href="">收录通道</a></h3>
             <ul class="new_pick clear">
+            <?php foreach ($new_pick as $key => $item):?>
                 <li class="clear">
-                    <a href="" class="pick-title">&nbsp;《沁园春·雪》&nbsp;</a>
-                    <a href="" class="pick-time">唐</a>&nbsp;·
-                    <a href="" class="pick-author">李白</a>
-                    <label class="pick-date">收录时间：2015-5-16 17:48:32</label>
-                    <p class="pick-sentence">七言七言七言七，七言七言七言七。七言七言七言七，七言七言七言七。</p>
+                    <a href="" class="pick-title">&nbsp;《<?=$item->poetry_title?>》&nbsp;</a>
+                    <a href="" class="pick-time"><?=$dynasty_list[$item->author_time]?></a>&nbsp;·
+                    <a href="" class="pick-author"><?=$item->author_name?></a>
+                    <label class="pick-date">收录时间：<?=date('Y-m-d H:i:s', $item->poetry_last)?></label>
+                    <p class="pick-sentence"><?=$item->poetry_content?></p>
                     <div class="pick-appreciation">
                         鉴赏&int;
                     </div>
@@ -50,44 +45,7 @@
                         <a href="">花</a>
                     </div>
                 </li>
-                <li class="clear">
-                    <a href="" class="pick-title">&nbsp;《沁园春·雪》&nbsp;</a>
-                    <a href="" class="pick-time">唐</a>&nbsp;·
-                    <a href="" class="pick-author">李白</a>
-                    <label class="pick-date">收录时间：2015-5-16 17:48:32</label>
-                    <p class="pick-sentence">七言七言七言七，七言七言七言七。七言七言七言七，七言七言七言七。</p>
-                    <div class="pick-appreciation">
-                        鉴赏&int;
-                    </div>
-                    <div class="pick-like">
-                        赞&int;
-                    </div>
-                    <div class="pick-tag">
-                        标签&int;
-                        <a href="">花</a>&nbsp;|
-                        <a href="">水</a>&nbsp;|
-                        <a href="">花</a>
-                    </div>
-                </li>
-                <li class="clear">
-                    <a href="" class="pick-title">&nbsp;《沁园春·雪》&nbsp;</a>
-                    <a href="" class="pick-time">唐</a>&nbsp;·
-                    <a href="" class="pick-author">李白</a>
-                    <label class="pick-date">收录时间：2015-5-16 17:48:32</label>
-                    <p class="pick-sentence">七言七言七言七，七言七言七言七。七言七言七言七，七言七言七言七。</p>
-                    <div class="pick-appreciation">
-                        鉴赏&int;
-                    </div>
-                    <div class="pick-like">
-                        赞&int;
-                    </div>
-                    <div class="pick-tag">
-                        标签&int;
-                        <a href="">花</a>&nbsp;|
-                        <a href="">水</a>&nbsp;|
-                        <a href="">花</a>
-                    </div>
-                </li>
+            <?php endforeach;?>
             </ul>
             <div id="pick-next" class="author-more">
                 <div class="next-right-line">
