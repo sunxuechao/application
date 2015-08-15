@@ -55,66 +55,39 @@
         </div>
         <div id="ct-right" class="right">
             <div class="hot-poetry">
-                <h3 class=""><strong>热门诗词</strong><a href="">更多</a></h3>
-                <ul>
+                <h3 class="" style="margin-right: 25px;">
+                    <strong>热门诗词</strong>
+                    <!-- <a href="">更多</a> -->
+                </h3>
+                <ul style="margin-left: 25px;">
+                <?php foreach ($hot_poetry as $key => $item):?>
                     <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
+                        <a href="#" target="_blank" title="<?=$item->poetry_title?>">
+                            《<?=$item->poetry_title?>》
                         </a>
                     </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
+                <?php endforeach;?>
                 </ul>
                 <div class="more">
                     <a href="JavaScript:void(0);">&nbsp;</a>
                 </div>
             </div>
             <div class="hot-author">
-                <h3 class=""><strong>著名作者</strong><a href="">更多</a></h3>
-                <ul>
+                <h3 class="" style="margin-right: 25px;">
+                    <strong>著名作者</strong>
+                    <!-- <a href="">更多</a> -->
+                </h3>
+                <ul style="margin-left: 25px;">
+                <?php foreach ($famous_author as $key => $author):?>
                     <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
+                        <a href="#" target="_blank" title="<?=$author->author_name?>">
+                            <?=$dynasty_list[$author->author_time]?>
+                        </a>&nbsp;·&nbsp;
+                        <a href="#" target="_blank" title="<?=$author->author_name?>">
+                            <?=$author->author_name?>
                         </a>
                     </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/148638.html" target="_blank" title="一篇文全面解析互联网产品运营">
-                            一篇文全面解析互联网产品运营
-                        </a>
-                    </li>
+                <?php endforeach;?>
                 </ul>
                 <div class="more">
                     <a href="JavaScript:void(0);">&nbsp;</a>

@@ -13,8 +13,10 @@ class Home extends My_Controller {
         $data = array();
         $data['change'] = $this->_change();
         $data['new_pick'] = $this->_new_pick();
+        $data['hot_poetry'] = $this->_hot_poetry();
+        $data['famous_author'] = $this->_famous_author();
         $data['header_data'] = $this->render_header('古言语');
-        $data['dynasty_list']= $this->Dynasty_Model->dynasty_list();
+        $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
 
         $this->load->view('header', $data);
         $this->load->view('home');
@@ -34,9 +36,32 @@ class Home extends My_Controller {
      * 获取换一换的数据
      */
     private function _change(){
-        $rand = rand(1, 7);
+        $rand = rand(0, 10);
         $field_val = array($rand);
         $where_val = array('poetry_id > ?');
         return $this->Poetry_Model->list_poetry($where_val, $field_val, array(0, 3));
+    }
+
+    /**
+     * 获取热门诗词
+     */
+    private function _hot_poetry(){
+        $field_val = array(1);
+        $where_val = array('1 = ?');
+        $order_by  = 'poetry_view DESC';
+        return $this->Poetry_Model->list_poetry($where_val, $field_val, array(0, 5), $order_by);
+    }
+
+    /**
+     * 获取著名作者
+     */
+    private function _famous_author(){        
+        $this->load->model('Author_Model', '', true);
+
+        $rand = rand(1, 7);
+        $field_val = array($rand);
+        $where_val = array('author_id > ?');
+        $order_by  = 'poetry_view DESC';
+        return $this->Author_Model->author_list($where_val, $field_val, array(0, 5));
     }
 }

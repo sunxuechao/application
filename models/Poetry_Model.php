@@ -111,12 +111,12 @@ class Poetry_Model extends CI_Model {
      * @param array $limit 查询的偏移值
      * @return array
      */
-    public function list_poetry($where = array(), $field_val = array(), $limit = array(0, 10)){
+    public function list_poetry($where = array(), $field_val = array(), $limit = array(0, 10), $order = 'poetry_id DESC'){
         $con_limit = implode(', ', $limit);
         $con_field = implode(' AND ', $where);
 
         $sql  = 'SELECT * FROM ' . self::DB_TABLE_POEM . ' WHERE ' . $con_field;
-        $sql .= ' ORDER BY poetry_id DESC LIMIT ' . $con_limit;
+        $sql .= ' ORDER BY ' . $order . ' LIMIT ' . $con_limit;
 
         $query = $this->db->query($sql, $field_val);
         return $query->result();
