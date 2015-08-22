@@ -5,7 +5,7 @@ class Poem extends My_Controller {
 
     public function index() {
         $data = $this->get_data();
-
+        
         $this->load->view('header', $data);
         $this->load->view('poem/list');
         $this->load->view('footer');
