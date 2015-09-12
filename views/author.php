@@ -1,36 +1,35 @@
     <div id="ct-top">
         <div id="top-head">
-            <div id="top-title">最新收录</div>
+            <div id="top-title">苏轼诗词</div>
         </div>
     </div>
     <div id="content">
         <div id="ct-left" class="left">
-            <ul class="new_pick clear">
-            <?php foreach ($new_pick as $key => $item):?>
-                <li class="clear">
-                    <a href="" class="pick-title">&nbsp;《<?=$item->poetry_title?>》&nbsp;</a>
-                    <a href="" class="pick-time"><?=$dynasty_list[$item->author_time]?></a>&nbsp;·
-                    <a href="" class="pick-author"><?=$item->author_name?></a>
-                    <label class="pick-date">收录时间：<?=date('Y-m-d H:i:s', $item->poetry_last)?></label>
-                    <p class="pick-sentence"><?=$item->poetry_content?></p>
-                    <!-- <div class="pick-appreciation">
-                        鉴赏&int;
-                    </div>
-                    <div class="pick-like">
-                        赞&int;
-                    </div>
-                    <div class="pick-tag">
-                        标签&int;
-                        <a href="">花</a>&nbsp;|
-                        <a href="">水</a>&nbsp;|
-                        <a href="">花</a>
-                    </div> -->
-                </li>
-            <?php endforeach;?>
-            </ul>
-            <div id="pick-next" class="author-more">
-                <div class="next-right-line">
-                    <a href="JavaScript:void(0);">加载更多</a>
+            <div id="author-brief" style="text-align: left;">
+                <h3>
+                    <strong>苏轼简介</strong>
+                    <!-- <a href="">更多</a> -->
+                </h3>
+                <p>横看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不同。</p>
+                <p>不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。</p>
+            </div>
+            <div id="author-poem">
+                <h3>
+                    <strong>苏轼诗词</strong>
+                    <!-- <a href="">更多</a> -->
+                </h3>
+                <ul>
+                <?php foreach ($hot_poetry as $key => $item):?>
+                    <li>
+                        <a href="#" target="_blank" title="<?=$item->poetry_title?>">
+                            《<?=$item->poetry_title?>》
+                        </a>
+                        <label><?=$item->poetry_content?></label>
+                    </li>
+                <?php endforeach;?>
+                </ul>
+                <div class="more">
+                    <a href="JavaScript:void(0);">&nbsp;</a>
                 </div>
             </div>
         </div>
