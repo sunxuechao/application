@@ -105,6 +105,26 @@ class Poetry_Model extends CI_Model {
     }
 
     /**
+     * 修改诗词到正式表
+     * @param array $data 更新进数据库的数组
+     * @param array $where 更新数据表的条件
+     * @throws 抛出可能存在的异常
+     * @return int
+     */
+    public function update_poem($data = array(), $where = array()){
+        if(empty($data) || !is_array($data)){
+            throw new Exception('Poem Update Data Empty', 200001);
+        }
+
+        if(empty($where) || !is_array($where)){
+            throw new Exception('Poem Update Where Empty', 200001);
+        }
+
+        $this->db->update(self::DB_TABLE_POEM, $data, $where);
+        return $this->db->affected_rows();
+    }
+    
+    /**
      * 获取正式表诗词
      * @param array $where 条件查询字段
      * @param array $field_val 条件查询值

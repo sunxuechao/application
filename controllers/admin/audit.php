@@ -18,7 +18,11 @@ class Audit extends My_Controller {
 
         $data['poem_status'] = array('1' => '未审', '2' => '通过', '3' => '驳回',);
         $data['header_data'] = $this->render_header('测试地址');
-        $this->load->view('admin/audit_list', $data);
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/left_menu');
+        $this->load->view('admin/audit_list');
+        $this->load->view('admin/footer');
     }
 
     /**
@@ -40,6 +44,11 @@ class Audit extends My_Controller {
         $data['similar_list'] = $this->Poetry_Model->list_poetry($where_val, $field_val, array(0, 10));
 
         $data['header_data'] = $this->render_header('测试地址');
-        $this->load->view('admin/audit_detail', $data);
+        $data['pop_warn'] = $this->load->view('admin/pop_warn', '', true);
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/left_menu');
+        $this->load->view('admin/audit_detail');
+        $this->load->view('admin/footer');
     }
 }

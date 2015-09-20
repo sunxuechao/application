@@ -10,6 +10,12 @@ class Author_Model extends CI_Model {
         parent::__construct();
     }
 
+    /**
+     * 添加作者信息
+     * @param array $data 添加进数据库的数组
+     * @throws 抛出可能存在的异常
+     * @return int
+     */
     public function add_author($data){
         if(empty($data) || !is_array($data)){
             throw new Exception('Poem Add Data Empty', 200001);
@@ -22,6 +28,26 @@ class Author_Model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /**
+     * 修改作者信息表
+     * @param array $data 更新进数据库的数组
+     * @param array $where 更新数据表的条件
+     * @throws 抛出可能存在的异常
+     * @return int
+     */
+    public function update_author($data = array(), $where = array()){
+        if(empty($data) || !is_array($data)){
+            throw new Exception('Poem Update Data Empty', 200001);
+        }
+
+        if(empty($where) || !is_array($where)){
+            throw new Exception('Poem Update Where Empty', 200001);
+        }
+
+        $data['update_time'] = time();
+        $this->db->update(self::DB_TABLE_AUTHOR, $data, $where);
+        return $this->db->affected_rows();
+    }
 
     /**
      * 获取作者简介信息
@@ -35,7 +61,7 @@ class Author_Model extends CI_Model {
         $con_field = implode(' AND ', $where);
 
         $sql  = 'SELECT * FROM ' . self::DB_TABLE_AUTHOR . ' WHERE ' . $con_field;
-        $sql .= ' LIMIT ' . $con_limit;
+        $sql .= ' ORDER BY author_id DESC LIMIT ' . $con_limit;
 
         $query = $this->db->query($sql, $field_val);
         return $query->result();

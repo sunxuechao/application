@@ -8,23 +8,19 @@
             <ul class="new_pick clear">
             <?php foreach ($new_pick as $key => $item):?>
                 <li class="clear">
-                    <a href="" class="pick-title">&nbsp;《<?=$item->poetry_title?>》&nbsp;</a>
-                    <a href="" class="pick-time"><?=$dynasty_list[$item->author_time]?></a>&nbsp;·
-                    <a href="" class="pick-author"><?=$item->author_name?></a>
+                    <a href="<?=$header_data['site_host']?>poem/detail/<?=$item->poetry_id?>" class="pick-title">
+                        《<?=$item->poetry_title?>》&nbsp;
+                    </a>
+                    <a href="JavaScript:void(0);" class="pick-time">
+                        <?=$dynasty_list[$item->author_time]?>
+                    </a>&nbsp;·
+                    <a href="<?=$header_data['site_host']?>author/detail/<?=$item->author_id?>" class="pick-author">
+                        <?=$item->author_name?>
+                    </a>
                     <label class="pick-date">收录时间：<?=date('Y-m-d H:i:s', $item->poetry_last)?></label>
-                    <p class="pick-sentence"><?=$item->poetry_content?></p>
-                    <!-- <div class="pick-appreciation">
-                        鉴赏&int;
-                    </div>
-                    <div class="pick-like">
-                        赞&int;
-                    </div>
-                    <div class="pick-tag">
-                        标签&int;
-                        <a href="">花</a>&nbsp;|
-                        <a href="">水</a>&nbsp;|
-                        <a href="">花</a>
-                    </div> -->
+                    <p class="pick-sentence">
+                        <?=implode('', json_decode($item->poetry_content, true))?>
+                    </p>
                 </li>
             <?php endforeach;?>
             </ul>
@@ -38,7 +34,6 @@
             <div class="hot-poetry">
                 <h3 class="" style="margin-right: 25px;">
                     <strong>热门诗词</strong>
-                    <!-- <a href="">更多</a> -->
                 </h3>
                 <ul>
                 <?php foreach ($hot_poetry as $key => $item):?>
@@ -56,7 +51,6 @@
             <div class="hot-author">
                 <h3 class="" style="margin: 0 25px 0 0;">
                     <strong>著名作者</strong>
-                    <!-- <a href="">更多</a> -->
                 </h3>
                 <ul>
                 <?php foreach ($famous_author as $key => $author):?>

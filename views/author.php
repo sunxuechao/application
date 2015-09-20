@@ -1,30 +1,31 @@
     <div id="ct-top">
         <div id="top-head">
-            <div id="top-title">苏轼诗词</div>
+            <div id="top-title"><?=$curr_author['author_name']?>诗词</div>
         </div>
     </div>
     <div id="content">
         <div id="ct-left" class="left">
             <div id="author-brief" style="text-align: left;">
                 <h3>
-                    <strong>苏轼简介</strong>
+                    <strong><?=$curr_author['author_name']?>简介</strong>
                     <!-- <a href="">更多</a> -->
                 </h3>
-                <p>横看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不看成岭侧成峰，远近高低各不同。</p>
-                <p>不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。不识庐山真面目，只缘身在此山中。</p>
+                <?php foreach ($curr_author['author_brief'] as $key => $item):?>
+                    <p><?=$item?></p>
+                <?php endforeach;?>
             </div>
             <div id="author-poem">
                 <h3>
-                    <strong>苏轼诗词</strong>
+                    <strong>所有作品</strong>
                     <!-- <a href="">更多</a> -->
                 </h3>
                 <ul>
                 <?php foreach ($hot_poetry as $key => $item):?>
                     <li>
-                        <a href="#" target="_blank" title="<?=$item->poetry_title?>">
+                        <a href="<?=$header_data['site_host']?>poem/detail/<?=$item->poetry_id?>">
                             《<?=$item->poetry_title?>》
                         </a>
-                        <label><?=$item->poetry_content?></label>
+                        <label><?=implode('', json_decode($item->poetry_content, true))?></label>
                     </li>
                 <?php endforeach;?>
                 </ul>
@@ -37,12 +38,11 @@
             <div class="hot-poetry">
                 <h3 class="" style="margin-right: 25px;">
                     <strong>热门诗词</strong>
-                    <!-- <a href="">更多</a> -->
                 </h3>
                 <ul>
                 <?php foreach ($hot_poetry as $key => $item):?>
                     <li>
-                        <a href="#" target="_blank" title="<?=$item->poetry_title?>">
+                        <a href="<?=$header_data['site_host']?>poem/detail/<?=$item->poetry_id?>">
                             《<?=$item->poetry_title?>》
                         </a>
                     </li>
@@ -55,15 +55,14 @@
             <div class="hot-author">
                 <h3 class="" style="margin: 0 25px 0 0;">
                     <strong>著名作者</strong>
-                    <!-- <a href="">更多</a> -->
                 </h3>
                 <ul>
                 <?php foreach ($famous_author as $key => $author):?>
                     <li>
-                        <a href="#" target="_blank" title="<?=$author->author_name?>">
+                        <a href="JavaScript:void(0);" target="_blank" title="<?=$author->author_name?>">
                             <?=$dynasty_list[$author->author_time]?>
                         </a>&nbsp;·&nbsp;
-                        <a href="#" target="_blank" title="<?=$author->author_name?>">
+                        <a href="<?=$header_data['site_host']?>author/detail/<?=$author->author_id?>">
                             <?=$author->author_name?>
                         </a>
                     </li>
