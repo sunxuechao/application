@@ -15,8 +15,8 @@ class Home extends My_Controller {
         $data['new_pick'] = $this->_new_pick();
         $data['hot_poetry'] = $this->_hot_poetry();
         $data['famous_author'] = $this->_famous_author();
-        $data['header_data'] = $this->render_header('古言语');
         $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
+        $data['header_data'] = $this->render_header('古言语|诸子百家论道');
 
         $this->load->view('header', $data);
         $this->load->view('home');
