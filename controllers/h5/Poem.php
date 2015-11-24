@@ -22,8 +22,8 @@ class Poem extends My_Controller {
         $data['hot_poetry'] = $this->_hot_poetry();
         $data['curr_poetry'] = $this->_current_poetry();
         $data['famous_author'] = $this->_famous_author();
-        $data['header_data'] = $this->render_header('测试地址');
         $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
+        $data['header_data'] = $this->render_header($data['curr_poetry']['poetry_title'] . '_' . $data['curr_poetry']['author_name'] . '_古言语|百家论道');
 
         $this->load->view('h5/header', $data);
         $this->load->view('h5/poem');

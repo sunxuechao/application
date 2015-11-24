@@ -14,7 +14,7 @@ class Home extends My_Controller {
         $data = array();
         $data['new_pick'] = $this->_new_pick();
         $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
-        $data['header_data'] = $this->render_header('古言语|诸子百家论道');
+        $data['header_data'] = $this->render_header('古言语|百家论道');
 
         $this->load->view('h5/header', $data);
         $this->load->view('h5/home');

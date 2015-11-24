@@ -1,34 +1,38 @@
-<div data-role="content" data-theme="f">
-    <div id="poem-main" style="text-align: center;">
+<div data-role="content" data-theme="f" class="poetry-body">
+    <div id="poem-main">
         <div id="poem-title">
             <p style="margin-top:0px;"><?=$curr_poetry['poetry_title']?></p>
         </div>
-        <div id="poem-author" style="margin-left:93px;">
-            作者：
-            <a href="<?=$header_data['site_host']?>h5/author/detail/<?=$curr_poetry['author_id']?>" class="pick-author">
-                <?=$curr_poetry['author_name']?>
-            </a>
+        <div id="poem-author">
+            <a href="<?=$header_data['site_host']?>h5/author/detail/<?=$curr_poetry['author_id']?>" data-ajax="false" class="pick-author">&nbsp;<?=$curr_poetry['author_name']?></a>&nbsp;|
+            <a href="javascript:void(0);">唐朝</a>&nbsp;|
+            <a href="javascript:void(0);" style="margin-right: 25px;">浏览(10)</a>
         </div>
-        <div id="poem-content">
+        <div id="poem-content" style="padding-bottom: 20px;">
         <?php foreach ($curr_poetry['poetry_content'] as $key => $item):?>
             <p><?=$item?></p>
         <?php endforeach;?>
         </div>
     </div>
-    <h2>全部诗词</h2>
-    <ul data-theme="f">
+    <h3 class="hr-title">
+        <span>作者推荐</span>
+    </h3>
+    <div>
+        <ul data-theme="f">
         <?php foreach ($hot_poetry as $key => $item):?>
-        <li>
-            <div class="poetry-info">
-                <a href="<?=$header_data['site_host']?>h5/poem/detail/<?=$item->poetry_id?>" data-ajax="false" class="poetry-content">
-                    《<?=$item->poetry_title?>》<?=mb_strimwidth(implode('', json_decode($item->poetry_content, true)), 0, 200, "...")?>
-                </a>
-            </div>
-            <div class="poetry-opera">
-                <a class="poetry-like" style="width: 50%;">赞&nbsp;1</a>
-                <a class="poetry-comment" style="width: 49.5%;">评论&nbsp;1</a>
-            </div>
-        </li>
-    <?php endforeach;?>
-    </ul>
+            <li style="">
+                <div class="poetry-info">
+                    <a href="<?=$header_data['site_host']?>h5/poem/detail/<?=$item->poetry_id?>" data-ajax="false" class="poetry-content">
+                        《<?=$item->poetry_title?>》<?=mb_strimwidth(implode('', json_decode($item->poetry_content, true)), 0, 200, "...")?>
+                    </a>
+                </div>
+                <div class="poetry-opera">
+                    <a href="<?=$header_data['site_host']?>h5/author/detail/<?=$item->author_id?>" data-ajax="false" class="poetry-author"><?=$item->author_name?></a>
+                    <a href="javascript:void(0);" class="poetry-time"><?=$dynasty_list[$item->author_time]?></a>
+                    <a class="poetry-like">赞(0)</a>
+                </div>
+            </li>
+        <?php endforeach;?>
+        </ul>
+    </div> 
 </div>

@@ -12,7 +12,7 @@
 <div data-role="page" id="main-content" data-theme="f">
     <div data-role="header" data-theme="f">
         <div class="wap-header">
-            <a href="#" name="shici" class="active">首页</a>
+            <a href="<?=$header_data['site_host']?>" data-ajax="false" name="shici" class="active">首页</a>
             <a href="#" name="shici" style="width: 74.5%;border-right: 0;">&nbsp;</a>
         </div>
     </div>

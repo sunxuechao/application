@@ -22,7 +22,7 @@ class Author extends My_Controller {
         $data['curr_author'] = $this->_current_author();
         $data['famous_author'] = $this->_famous_author();
         $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
-        $data['header_data'] = $this->render_header($data['curr_author']['author_name']);
+        $data['header_data'] = $this->render_header($data['curr_author']['author_name'] . '_古言语|百家论道');
 
         $this->load->view('h5/header', $data);
         $this->load->view('h5/author');
