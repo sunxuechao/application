@@ -52,6 +52,8 @@
             <div class="content-wrap">
                 <div id="content">
                     <div id="nav" class="left-border post-nav">
+                        <a href="">首页</a>
+                        <span>&nbsp; / &nbsp;</span>
                         <a href="">李白</a>
                         <span>&nbsp; / &nbsp;</span>
                         <span>兰亭序【正文】</span>
@@ -72,15 +74,8 @@
                                 <p>渔父醉，蓑衣舞。醉里却寻归路。轻舟短棹任斜横，醒后不知何处。</p>
                                 <p>小沟东接长江，柳堤苇岸连云际。烟村潇洒，人闲一哄，渔樵早市。永昼端居，寸阴虚度，了成何事。但丝莼玉藕，珠粳锦鲤，相留恋，又经岁。</p>
                                 <p>因念浮丘旧侣，惯瑶池、羽觞沈醉。青鸾歌舞，铢衣摇曳，壶中天地。飘堕人间，步虚声断，露寒风细。抱素琴，独向银蟾影里，此怀难寄。</p>
-                                <p>
-    <p style="font-family:Simsun;font-size:16px;background-color:#FCF9E9;">
-        六年，城盛乐以为北都，修故平城以为南都。帝登平城西山，观望地势，乃更南百里，于氵垒水之阳黄瓜堆筑新平城，晋人谓之小平城。使子六修镇之，统领南部。
-    </p>
-    <p style="font-family:Simsun;font-size:16px;background-color:#FCF9E9;">
-        八年，晋愍帝进帝为代王，置官属，食代、常山二郡。先是国俗宽简，至是明刑峻法，诸部人多以违命得罪。凡后期者皆举部戮之，或有室家相携，悉赴死所。人问何之，曰当就诛。其威严若此。
-    </p>
-</p>
                             </div>
+                            <?php if(false){ ?>
                             <div class="entry-opera">
                                 <ul>
                                     <li class="author-name">
@@ -97,6 +92,7 @@
                                     </li>
                                 </ul>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -119,7 +115,7 @@
                         <ul>
                             <li>
                                 <span class="views"> 1,369,142</span>
-                                <a href="" title="推荐：十个国外黄色网站欣赏">李白．唐朝</a>
+                                <a href="" title="推荐：十个国外黄色网站欣赏">李白 ．唐朝</a>
                             </li>
                             <li>
                                 <span class="views"> 1,369,142</span>

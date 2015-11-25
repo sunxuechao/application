@@ -27,6 +27,7 @@
                         </li>
                     </ul>
                 </div>
+                <?php if(false){ ?>
                 <div id="beautiful-lines">
                     <h3 class="bookmark-title left-border">佳句鉴赏</h3>
                     <ul>
@@ -34,27 +35,14 @@
                             <span class="num-1">1</span>
                             <a href="">戍鼓断人行，边秋一雁声。</a>
                         </li>
-                        <li class="most-view">
-                            <span class="views">2</span>
-                            <a href="">在过去很长一段时间，苹果都一直以自己流线</a>
-                        </li>
-                        <li class="most-view">
-                            <span class="views">3</span>
-                            <a href="">在过去很长一段时间，苹果都一直以自己流线</a>
-                        </li>
-                        <li class="most-view">
-                            <span class="views">4</span>
-                            <a href="">在过去很长一段时间，苹果都一直以自己流线</a>
-                        </li>
                     </ul>
                 </div>
+                <?php } ?>
             </div>
             <div class="content-wrap">
                 <div id="content">
                     <div id="nav" class="left-border post-nav">
-                        <a href="http://www.uisdc.com" title="优设-UISDC" rel="home" class="trail-begin">Home</a>
-                        <span>&nbsp; / &nbsp;</span>
-                        <span>ICON</span>
+                        <span>最新收集</span>
                     </div>
                     <div id="post-feed">
                         <div class="post-detail">
