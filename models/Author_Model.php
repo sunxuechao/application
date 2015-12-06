@@ -1,9 +1,9 @@
 <?php
 /**
  * 作者相关操作
- * 
  */
 class Author_Model extends CI_Model {
+
     const DB_TABLE_AUTHOR = 'author';
 
     public function __construct() {
@@ -11,60 +11,40 @@ class Author_Model extends CI_Model {
     }
 
     /**
-     * 添加作者信息
-     * @param array $data 添加进数据库的数组
-     * @throws 抛出可能存在的异常
-     * @return int
+     * 插入作者表内数据
      */
-    public function add_author($data){
-        if(empty($data) || !is_array($data)){
-            throw new Exception('Poem Add Data Empty', 200001);
-        }
-
+    public function author_add($data){
         $data['create_time'] = time();
         $data['update_time'] = time();
+        
         $this->db->insert(self::DB_TABLE_AUTHOR, $data);
-
         return $this->db->insert_id();
     }
 
     /**
-     * 修改作者信息表
-     * @param array $data 更新进数据库的数组
-     * @param array $where 更新数据表的条件
-     * @throws 抛出可能存在的异常
-     * @return int
+     * 更新作者表内数据
      */
-    public function update_author($data = array(), $where = array()){
-        if(empty($data) || !is_array($data)){
-            throw new Exception('Poem Update Data Empty', 200001);
-        }
-
-        if(empty($where) || !is_array($where)){
-            throw new Exception('Poem Update Where Empty', 200001);
-        }
-
+    public function author_edit($data, $where){
         $data['update_time'] = time();
-        $this->db->update(self::DB_TABLE_AUTHOR, $data, $where);
+        $sqlWhere = implode(' AND ', $where);
+        $this->db->update(self::DB_TABLE_AUTHOR, $data, $sqlWhere);
+        
         return $this->db->affected_rows();
     }
 
     /**
-     * 获取作者简介信息
-     * @param array $where 条件查询字段
-     * @param array $field_val 条件查询值
-     * @param array $limit 查询的偏移值
-     * @return array
+     * @param array $where 查询条件
+     * @param array $limit 返回数据偏移量
+     * @param array $order 排序规则
+     * @return array 作者列表
      */
-    public function author_list($where = array(), $field_val = array(), $limit = array(0, 10)){
-        $con_limit = implode(', ', $limit);
-        $con_field = implode(' AND ', $where);
+    public function author_list($where = array(), $limit = array(0, 10), $order = array('author_id DESC')){
+        $sqlOrder = ' ORDER BY ' . implode(', ', $order);
+        $sqlWhere = empty($where) ? '' : ' AND ' . implode(' AND ', $where);
+        $sqlQuery = 'SELECT * FROM ' . self::DB_TABLE_AUTHOR . ' WHERE author_status = 0 ';
+        $sqlQuery = $sqlQuery . $sqlWhere . $sqlOrder . ' LIMIT ' . $limit[0] . ', ' . $limit[1];
 
-        $sql  = 'SELECT * FROM ' . self::DB_TABLE_AUTHOR . ' WHERE ' . $con_field;
-        $sql .= ' ORDER BY author_id DESC LIMIT ' . $con_limit;
-
-        $query = $this->db->query($sql, $field_val);
-        return $query->result();
+        $query = $this->db->query($sqlQuery);
+        return $query->result_array();
     }
-
 }

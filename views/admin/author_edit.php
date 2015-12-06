@@ -26,17 +26,7 @@
             <tr>
                 <td class="tdc">简介：</td>
                 <td class="tdl">
-                <?php foreach ($author_info['author_brief'] as $key => $item):?>
-                    <div class="input-text">
-                        <textarea cols="80" rows="5" name="author-brief[]"><?=$item?></textarea>
-                        <?php if($key == 0){ ?>
-                        <input type="button" value="+" class="btn textarea-add" style="margin-top: 25px;float: right;" />
-                        <input type="button" value="-" class="btn textarea-minus" style="display:none;margin-top: 25px;float: right;" />
-                        <?php }else{ ?>
-                        <input type="button" value="-" class="btn textarea-minus" style="margin-top: 25px;float: right;" />
-                        <?php } ?>
-                    </div>
-                <?php endforeach;?>
+                    <?=$kindeditor?>
                 </td>
             </tr>
         </table>
@@ -50,18 +40,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $('#author-time').find("option[value=<?=$author_info['author_time']?>]").attr('selected', true);
-
-    $('.textarea-add').bind('click', function(){
-        var objParent = $(this).parent().parent();
-        var cloneInput = $('.input-text:first').clone(true);
-        cloneInput.find('.textarea-minus').show();
-        cloneInput.find('.textarea-add').hide();
-        objParent.append(cloneInput);
-    });
-
-    $('.textarea-minus').bind('click', function(){
-        $(this).parent().remove();
-    });
 
     $('#btn-submit').bind('click', function(){
         $('#author-form').submit();

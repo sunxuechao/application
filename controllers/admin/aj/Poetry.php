@@ -6,39 +6,40 @@ class Poetry extends My_Controller{
     public function index(){
         try {
             $data = array();
-            $poetry_id = $this->input->post('poem');
-            $poetry_title = $this->input->post('title');
-            $poetry_author = $this->input->post('author');
-            $poetry_content = $this->input->post('content');
+            $poetryId = $this->input->post('poem');
+            $poetryTitle = $this->input->post('title');
+            $poetryAuthor = $this->input->post('author');
+            $poetryContent = $this->input->post('content');
 
-            /* 格式化诗词内容 */
-            $data['poetry_content'] = array_values(array_filter(explode('##', $poetry_content)));
-            if(empty($data['poetry_content'])){
+            if(empty($poetryContent)){
                 throw new Exception('诗词内容不可为空', 100001);
             }
 
             /* 获取作者相关信息 */
-            $field_val = array($poetry_author);
-            $where_val = array('author_name = ?');
             $this->load->model('Author_Model', '', true);
-            $author_info = $this->Author_Model->author_list($where_val, $field_val);
-            if(empty($author_info)){
+            $sqlWhere = array("author_name = '{$poetryAuthor}'");
+            $authorInfo = $this->Author_Model->author_list($sqlWhere);
+            if(empty($authorInfo)){
                 throw new Exception('请先添加作者信息', 100001);
             }
-            $author_info = $author_info[0];
-            $data['author_id'] = $author_info->author_id;
-            $data['author_name'] = $author_info->author_name;
-            $data['author_time'] = $author_info->author_time;
+
+            /* 组合作者信息 */
+            $authorInfo = $authorInfo[0];
+            $data['author_id'] = $authorInfo['author_id'];
+            $data['author_name'] = $authorInfo['author_name'];
+            $data['author_time'] = $authorInfo['author_time'];
 
             /* 更新数据库数据 */
             $this->load->model('Poetry_Model', '', true);
-            $data['poetry_content'] = json_encode($data['poetry_content']);
-            $data['poetry_title'] = $poetry_title;
-            if($poetry_id > 0){
-                $this->Poetry_Model->update_poem($data, array('poetry_id' => $poetry_id));
+            $data['poetry_content'] = $poetryContent;
+            $data['poetry_title'] = $poetryTitle;
+            $data['poetry_last'] = time();
+            
+            if($poetryId > 0){
+                $this->Poetry_Model->poetry_edit($data, array('poetry_id = ' . $poetryId));
                 $msg = '修改诗词成功';
             }else{
-                $this->Poetry_Model->add_poetry($data);
+                $this->Poetry_Model->poetry_add($data);
                 $msg = '添加诗词成功';
             }
 

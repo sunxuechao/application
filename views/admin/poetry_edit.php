@@ -21,17 +21,7 @@
             <tr>
                 <td class="tdc">内容：</td>
                 <td class="tdl">
-                <?php foreach ($poem_info['poetry_content'] as $key => $item):?>
-                    <div class="input-text">
-                        <textarea cols="80" rows="5"><?=$item?></textarea>
-                        <?php if($key == 0){ ?>
-                        <input type="button" value="+" class="btn textarea-add" style="margin-top: 25px;float: right;" />
-                        <input type="button" value="-" class="btn textarea-minus" style="display:none;margin-top: 25px;float: right;" />
-                        <?php }else{ ?>
-                        <input type="button" value="-" class="btn textarea-minus" style="margin-top: 25px;float: right;" />
-                        <?php } ?>
-                    </div>
-                <?php endforeach;?>
+                    <?=$kindeditor?>
                 </td>
             </tr>
         </table>
@@ -42,24 +32,12 @@
 <?=$pop_warn?>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.textarea-add').bind('click', function(){
-        var objParent = $(this).parent().parent();
-        var cloneInput = $('.input-text:first').clone(true);
-        cloneInput.find('.textarea-minus').show();
-        cloneInput.find('.textarea-add').hide();
-        objParent.append(cloneInput);
-    });
-
-    $('.textarea-minus').bind('click', function(){
-        $(this).parent().remove();
-    });
-
     $('#btn-submit').bind('click', function(){
         var paramData = {};
         paramData.poem = <?=$poem_info['poetry_id']?>;
         paramData.title = $('#poem-title').val();
         paramData.author = $('#poem-author').val();
-        paramData.content = getPoemText();
+        paramData.content = $('#editor-area').val();
 
         var callData = {};
         callData.obj = $(this);

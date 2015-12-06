@@ -16,11 +16,11 @@
             </tr>
             <?php foreach ($author_list as $key => $item):?>
             <tr>
-                <td class="tdl"><?=$item->author_name?></td>
-                <td class="tdl"><?=$dynasty_list[$item->author_time]?></td>
+                <td class="tdl"><?=$item['author_name']?></td>
+                <td class="tdl"><?=$dynasty_list[$item['author_time']]?></td>
                 <td class="tdc">
-                    <a href="<?php echo $header_data['site_host']?>admin/author/edit/<?=$item->author_id?>" class="audit" data_type="pass">查看</a>
-                    <a href="<?php echo $header_data['site_host']?>admin/author/del/<?=$item->author_id?>" class="audit" data_type="pass">删除</a>
+                    <a href="<?php echo $header_data['site_host']?>admin/author/edit/<?=$item['author_id']?>" class="audit" data_type="pass">查看</a>
+                    <a href="<?php echo $header_data['site_host']?>admin/author/del/<?=$item['author_id']?>" class="audit" data_type="pass">删除</a>
                 </td>
             </tr>
             <?php endforeach;?>
