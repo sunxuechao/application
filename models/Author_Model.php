@@ -41,7 +41,7 @@ class Author_Model extends CI_Model {
     public function author_list($where = array(), $limit = array(0, 10), $order = array('author_id DESC')){
         $sqlOrder = ' ORDER BY ' . implode(', ', $order);
         $sqlWhere = empty($where) ? '' : ' AND ' . implode(' AND ', $where);
-        $sqlQuery = 'SELECT * FROM ' . self::DB_TABLE_AUTHOR . ' WHERE author_status = 0 ';
+        $sqlQuery = 'SELECT * FROM ' . self::DB_TABLE_AUTHOR . ' WHERE 1 = 1 ';//author_status = 0 ';
         $sqlQuery = $sqlQuery . $sqlWhere . $sqlOrder . ' LIMIT ' . $limit[0] . ', ' . $limit[1];
 
         $query = $this->db->query($sqlQuery);
