@@ -16,25 +16,25 @@
 	                <div id="menu">
 	                    <ul>
 	                        <li id="menu-item-156" class="">
-	                            <a href="http://www.uisdc.com/category/hot-download" class="sf-with-ul">诗词歌赋</a>
+	                            <a href="" class="sf-with-ul">诗词歌赋</a>
 	                        </li>
 	                        <li id="menu-item-155" class="">
-	                            <a href="http://www.uisdc.com/category/uiicon" class="sf-with-ul">医书药理</a>
+	                            <a href="" class="sf-with-ul">医书药理</a>
 	                        </li>
 	                        <li id="menu-item-228" class="">
-	                            <a href="http://www.uisdc.com/category/share">古典小说</a>
+	                            <a href="">古典小说</a>
 	                        </li>
 	                        <li id="menu-item-50" class="">
 	                            <a href="">经 &amp; 史 &amp; 子 &amp; 集</a>
 	                        </li>
 	                        <li id="menu-item-51" class="">
-	                            <a href="http://www.uisdc.com/category/work-blueprint">谚语 &amp; 歇后语</a>
+	                            <a href="">谚语 &amp; 歇后语</a>
 	                        </li>
 	                        <li id="menu-item-153" class="">
-	                            <a href="http://www.uisdc.com/category/site-recommend">古文观止</a>
+	                            <a href="">古文观止</a>
 	                        </li>
 	                        <li id="menu-item-431" class="">
-	                            <a href="http://www.uisdc.com/category/books-recommend">古籍杂谈</a>
+	                            <a href="">古籍杂谈</a>
 	                        </li>
 	                    </ul>
 	                </div>

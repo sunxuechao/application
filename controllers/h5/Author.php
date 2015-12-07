@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Author extends My_Controller {
 
+	private $_author_id = 0;
+    private $_page_title = '';
+
     public function __construct() {
         parent::__construct();
         $this->load->model('Dynasty_Model');
@@ -13,49 +16,44 @@ class Author extends My_Controller {
     public function index() {
         $this->detail();
     }
+
     /**
      * 渲染数据到页面
      */
     public function detail() {
         $data = array();
-        $data['hot_poetry'] = $this->_hot_poetry();
         $data['curr_author'] = $this->_current_author();
-        $data['famous_author'] = $this->_famous_author();
+        $data['header_data'] = $this->render_header($this->_page_title);
         $data['dynasty_list'] = $this->Dynasty_Model->dynasty_list();
-        $data['header_data'] = $this->render_header($data['curr_author']['author_name'] . '_古言语|百家论道');
+        $data['recommend'] = $this->_recommend();
 
         $this->load->view('h5/header', $data);
         $this->load->view('h5/author');
         $this->load->view('h5/footer');
     }
 
+    /**
+     * 获取当前页面展示的诗词
+     */
     private function _current_author(){
-        $where_val = array('author_id = ?');
-        $field_val = array(intval($this->uri->segment(4)));
-        $author_list = $this->Author_Model->author_list($where_val, $field_val, array(0, 1));
-        $curr_author = (array)($author_list[0]);
-        $curr_author['author_brief'] = json_decode($curr_author['author_brief'], true);
-        return $curr_author;
+        $authorId = intval($this->uri->segment(4));
+        $sqlWhere = array('author_id = ' . $authorId);
+        $authorList = $this->Author_Model->author_list($sqlWhere);
+
+        if(empty($authorList)){
+            show_404();
+        }
+        $this->_page_title = $authorList[0]['author_name'];
+        $this->_author_id = $authorList[0]['author_id'];
+        return $authorList[0];
     }
 
     /**
-     * 获取热门诗词
+     * 获取【站点推荐】
      */
-    private function _hot_poetry(){
-        $field_val = array(1);
-        $where_val = array('1 = ?');
-        $order_by  = 'poetry_view DESC';
-        return $this->Poetry_Model->list_poetry($where_val, $field_val, array(0, 10), $order_by);
-    }
-
-    /**
-     * 获取著名作者
-     */
-    private function _famous_author(){
-        $rand = rand(1, 7);
-        $field_val = array($rand);
-        $where_val = array('author_id > ?');
-        $order_by  = 'poetry_view DESC';
-        return $this->Author_Model->author_list($where_val, $field_val, array(0, 10));
+    private function _recommend(){
+        $where = array();
+        $where[] = 'author_id = ' . $this->_author_id;
+        return $this->Poetry_Model->poetry_list($where);
     }
 }
