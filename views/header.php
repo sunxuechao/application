@@ -15,8 +15,8 @@
 	            <div class="aside-left">
 	                <div id="menu">
 	                    <ul>
-	                        <li id="menu-item-156" class="">
-	                            <a href="" class="sf-with-ul">诗词歌赋</a>
+	                        <li>
+	                            <a href="<?=$header_data['site_host']?>" class="sf-with-ul">诗词歌赋</a>
 	                        </li>
 	                        <li id="menu-item-155" class="">
 	                            <a href="" class="sf-with-ul">医书药理</a>

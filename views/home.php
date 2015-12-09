@@ -29,15 +29,15 @@
         <?php foreach ($content_list as $key => $item):?>
         <div class="post-detail">
             <div class="entry-summary">
-                <a href="<?php echo $header_data['site_host']?>poem/detail/<?=$item['poetry_id']?>">
-                    《<?=$item['poetry_title']?>》<?=strip_tags($item['poetry_content'])?>
+                <a href="<?=$header_data['site_host']?>poem/detail/<?=$item['poetry_id']?>">
+                    《<?=$item['poetry_title']?>》<?=mb_strimwidth(strip_tags($item['poetry_content']), 0, 200, "...")?>
                 </a>
             </div>
         </div>
         <?php endforeach;?>
         <div class="page-nav">
-            <a href="<?php echo $header_data['site_host']?>home/page/<?=($curr_page-1)?>">上一页</a>
-            <a href="<?php echo $header_data['site_host']?>home/page/<?=($curr_page+1)?>">下一页</a>
+            <a href="<?=$header_data['site_host']?>home/page/<?=($curr_page-1)?>">上一页</a>
+            <a href="<?=$header_data['site_host']?>home/page/<?=($curr_page+1)?>">下一页</a>
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 <div id="content">
     <div id="nav" class="left-border post-nav">
-        <a href="">首页</a>
+        <a href="<?=$header_data['site_host']?>">首页</a>
         <span>&nbsp; / &nbsp;</span>
-        <a href="<?php echo $header_data['site_host']?>author/detail/<?=$curr_poetry['author_id']?>">
+        <a href="<?=$header_data['site_host']?>author/detail/<?=$curr_poetry['author_id']?>">
             <?=$curr_poetry['author_name']?>
         </a>
         <span>&nbsp; / &nbsp;</span>
@@ -13,7 +13,7 @@
             <h1 id="text-title"><?=$curr_poetry['poetry_title']?></h1>
             <div id="text-author">
                 <span id="author-card">
-                    <a class="url fn n" href="<?php echo $header_data['site_host']?>author/detail/<?=$curr_poetry['author_id']?>" title="cyRotel" target="_blank"><?=$curr_poetry['author_name']?></a>
+                    <a class="url fn n" href="<?=$header_data['site_host']?>author/detail/<?=$curr_poetry['author_id']?>" title="cyRotel" target="_blank"><?=$curr_poetry['author_name']?></a>
                 </span> &nbsp;&nbsp;
                 <!-- <span id="author-time">
                     <a href="" rel="tag" target="_blank">唐朝</a>

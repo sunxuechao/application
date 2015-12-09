@@ -1,6 +1,6 @@
 <div id="content">
     <div id="nav" class="left-border post-nav">
-        <a href="">首页</a>
+        <a href="<?=$header_data['site_host']?>">首页</a>
         <span>&nbsp; / &nbsp;</span>
         <span><?=$curr_author['author_name']?>【简介】</span>
     </div>

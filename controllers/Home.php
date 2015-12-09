@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends My_Controller {
 
     const PAGE_SIZE = 10;
+    private $_search_word = '';
 
     public function __construct() {
         parent::__construct();
@@ -17,6 +18,7 @@ class Home extends My_Controller {
 
     public function page(){
         $data = array();
+        $data['s_word'] = $this->_getSWord();
         $data['recommend'] = $this->_recommend();
         $data['content_list'] = $this->_content_list();
         $data['curr_page'] = intval($this->uri->segment(3));
@@ -36,6 +38,16 @@ class Home extends My_Controller {
     private function _content_list(){
         $currPage = intval($this->uri->segment(3));
         $sqlLimit = array(($currPage * self::PAGE_SIZE), self::PAGE_SIZE);
-        return $this->Poetry_Model->poetry_list(array(), $sqlLimit);
+        $sqlWhere = array("poetry_title LIKE '%{$this->_search_word}%' OR poetry_content LIKE '%{$this->_search_word}%'");
+        return $this->Poetry_Model->poetry_list($sqlWhere, $sqlLimit);
+    }
+
+    private function _getSWord(){
+        if(empty($this->_search_word)){
+            $this->_search_word = $this->input->get('s');
+            $this->_search_word = preg_replace("/\s/", "", $this->_search_word);
+        }
+
+        return $this->_search_word;
     }
 }
